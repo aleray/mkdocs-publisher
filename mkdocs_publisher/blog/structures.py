@@ -47,6 +47,8 @@ class BlogPost:
     slug: Optional[str] = None
     teaser: str = ""
     is_teaser: bool = False
+    pinned: bool = False
+    author: Optional[str] = None
 
     @property
     def as_dict(self) -> dict:

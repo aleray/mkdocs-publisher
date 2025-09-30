@@ -67,8 +67,13 @@ def create_blog_post_pages(
     categories_chunks: dict[str, list] = {}
     tags_chunks: dict[str, list] = {}
 
+    new_dict = {
+        (post.pinned, date): post
+        for date, post in blog_config.blog_posts.items()
+    }
+
     # Build post index pages
-    for index, date in enumerate(sorted(blog_config.blog_posts, reverse=True)):
+    for index, date in enumerate(sorted(new_dict, reverse=True)):
         index = (
             "index"
             if index < blog_config.plugin_config.posts_per_page
@@ -76,7 +81,7 @@ def create_blog_post_pages(
         )
         if index not in posts_chunks:
             posts_chunks[index] = []
-        posts_chunks[index].append(blog_config.blog_posts[date])
+        posts_chunks[index].append(blog_config.blog_posts[date[1]])
 
     # Build archive, category and tag pages
     for date in sorted(blog_config.blog_posts, reverse=True):
