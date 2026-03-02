@@ -212,20 +212,13 @@ def _render_and_write_page(
     # print(templates.list_templates())
     # template = templates.get_template("index.html")
 
-    try:
-        theme_env = blog_config.mkdocs_config.theme.get_env()  # returns a jinja2.Environment
-        template = theme_env.get_template("posts_list_foo.html")  # use base.html as parent
-        tpl_file = template.filename
-    except:
-        tpl_file = "posts-list.html"
-
     post_context = {
         "posts": single_posts_chunk,
         "site_url": str(blog_config.mkdocs_config.site_url),
         "config": blog_config.plugin_config,
         "translation": blog_config.translation,
     }
-    markdown = templates.render(tpl_file=tpl_file, context=post_context)
+    markdown = templates.render(tpl_file="posts-list-modified.html", context=post_context)
 
     # TODO: when using pub-meta key name should be taken from plugin config
     page_meta = {"title": page_title}

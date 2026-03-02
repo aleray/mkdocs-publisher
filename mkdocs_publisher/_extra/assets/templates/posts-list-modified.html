@@ -1,0 +1,45 @@
+{% for post in posts %}
+<article class="post" markdown=1>
+<header class="post__header">
+<div class="post__meta">
+    {% if post.pin %}📌{% endif %}
+
+    {% if post.categories %}
+    <ul class="post__tags">
+        {% for tag in post.categories %}
+        <li class="post__tag"><a href="{{ site_url }}{{ config.slug }}/categories/{{tag}}/">{{tag}}</a></li> 
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <br>
+
+    {% if post.author or post.date %}
+    <p class="post__byline">
+        Published
+        {% if post.author %}
+        <span class="post__author">By {{ post.author }}</span>
+        {% endif %}
+
+        {% if post.date %}
+        <span class="post__date">on {{ post.date.strftime("%A, %d %B %Y") }}</span>
+        {% endif %}
+    </p>
+    {% endif %}
+</div>
+
+<h1 class="post__title"><a class="post__link" href="{{ site_url }}{{ config.slug }}/{{ post.slug }}/">{{ post.title }}</a></h1>
+</header>
+
+<div class="post__content  content" markdown=1>
+{{ post.teaser }}
+
+{% if post.is_teaser %}
+<a href="{{ site_url }}{{ config.slug }}/{{ post.slug }}/" title="{{ post.title }}">{{ translation.teaser_link_text }}</a>
+{% endif %}
+</div>
+</article>
+{% endfor %}
+
+
+
