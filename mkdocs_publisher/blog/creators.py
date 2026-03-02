@@ -214,7 +214,7 @@ def _render_and_write_page(
 
     try:
         theme_env = blog_config.mkdocs_config.theme.get_env()  # returns a jinja2.Environment
-        template = theme_env.get_template("posts_list.html")  # use base.html as parent
+        template = theme_env.get_template("posts_list_foo.html")  # use base.html as parent
         tpl_file = template.filename
     except:
         tpl_file = "posts-list.html"
